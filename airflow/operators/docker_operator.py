@@ -247,6 +247,8 @@ class DockerOperator(BaseOperator):
                     if self.xcom_all else line.encode('utf-8')
 
     def get_command(self):
+        if type(command) == list:
+            commands = command
         if self.command is not None and self.command.strip().find('[') == 0:
             commands = ast.literal_eval(self.command)
         else:
